@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "cn.lxg.carmanager"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.androidVersionCode
+        versionName rootProject.ext.androidVersionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+
+    def appDependencies = rootProject.ext.appDependencies
+    apt appDependencies.daggerCompiler
+    apt appDependencies.butterKnifeApt
+    compile appDependencies.dagger
+    compile appDependencies.glide
+    compile appDependencies.gridlayout
+    compile appDependencies.butterKnife
+    compile appDependencies.rxJava
+    compile appDependencies.rxAndroid
+    compile appDependencies.okhttp
+    compile appDependencies.gson
+    compile appDependencies.recyclerView
+    compile appDependencies.android_design
+    compile appDependencies.cardview
+}
